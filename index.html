@@ -1,77 +1,761 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LinguaOps | Language operations for global teams</title>
-    <meta
-      name="description"
-      content="LinguaOps helps teams translate, localize, and operate multilingual content faster. Join the early-access list."
-    />
-    <style>
-      :root {
-        color-scheme: light dark;
-      }
-      body {
-        margin: 0;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        line-height: 1.5;
-        background: #0b1020;
-        color: #f4f6ff;
-      }
-      main {
-        max-width: 760px;
-        margin: 0 auto;
-        padding: 4rem 1.25rem;
-      }
-      h1 {
-        font-size: clamp(2rem, 5vw, 3rem);
-        margin-bottom: 0.75rem;
-      }
-      p {
-        margin: 0.5rem 0;
-      }
-      .card {
-        margin-top: 2rem;
-        padding: 1.25rem;
-        border: 1px solid #2c3455;
-        border-radius: 12px;
-        background: #141b31;
-      }
-      .cta {
-        display: inline-block;
-        margin-top: 1rem;
-        padding: 0.7rem 1rem;
-        border-radius: 10px;
-        background: #8cfac8;
-        color: #0b1020;
-        text-decoration: none;
-        font-weight: 700;
-      }
-      .muted {
-        color: #c7cceb;
-        font-size: 0.95rem;
-      }
-    </style>
-  </head>
-  <body>
-    <main>
-      <p class="muted">Coming soon</p>
-      <h1>LinguaOps</h1>
-      <p>
-        Language operations for growing teams that need fast, reliable multilingual content.
+<!DOCTYPE html>
+<html lang="ro" data-lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>LinguaOps – Catch AI Translation Errors Before They Reach Clients</title>
+  <meta name="description" content="LinguaOps is an AI‑powered QA layer that catches morphology and terminology drift in Romanian machine translation. Built for freelancers and agencies who need to ship clean, client‑ready output — fast.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <style>
+    /* ===== CSS CUSTOM PROPERTIES (DESIGN TOKENS) ===== */
+    :root {
+      --cyan:          #40dbfe;
+      --orange:        #df8c00;
+      --dark:          #0b1e33;
+      --dark-text:     #e6f0fa;
+      --body-bg:       #f6f9fc;
+      --surface:       #ffffff;
+      --panel:         #ffffff;
+      --panel-border:  #e2e8f0;
+      --muted:         #64748b;
+      --font-sans:     'Inter', system-ui, -apple-system, sans-serif;
+      --font-display:  'Lato', 'Inter', sans-serif;
+      --shadow-sm:     0 1px 2px rgba(0,0,0,.04);
+      --shadow-md:     0 8px 24px rgba(0,0,0,.06);
+      --radius-lg:     16px;
+      --radius-xl:     20px;
+    }
+
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+    body {
+      font-family: var(--font-sans);
+      background: var(--body-bg);
+      color: #1e293b;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    h1, h2, h3, .display-font { font-family: var(--font-display); }
+    a { color: inherit; text-decoration: none; }
+    img, svg { display: block; max-width: 100%; }
+    section { padding: 5rem 1.5rem; max-width: 1200px; margin: 0 auto; }
+
+    /* ===== UTILITY ===== */
+    .section-tag {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--orange);
+      background: #fff7ed;
+      padding: 0.35rem 1rem;
+      border-radius: 50px;
+      margin-bottom: 1rem;
+    }
+    .section-title { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; margin-bottom: 0.75rem; line-height: 1.2; }
+    .section-desc { font-size: 1.1rem; color: var(--muted); margin-bottom: 2.5rem; line-height: 1.5; }
+
+    /* ===== NAVIGATION ===== */
+    .site-nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,.85); backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--panel-border);
+      padding: 0.9rem 2rem;
+    }
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 0.6rem; font-family: var(--font-display); font-weight: 900; font-size: 1.35rem; color: var(--dark); }
+    .nav-logo svg { width: 38px; height: 38px; flex-shrink: 0; }
+    .nav-links { padding-left: 5rem; padding-right:2rem; display: flex; align-items: center; gap: 1rem; font-size: 0.92rem; font-weight: 500; }
+    .nav-links a { color: #334155; transition: color .15s; white-space: nowrap; }
+    .nav-links a:hover { color: var(--cyan); }
+    .nav-cta {
+      background: var(--orange); color: #fff;
+      padding: 0.55rem 1.5rem; border-radius: 50px;
+      font-weight: 700; font-size: 0.9rem;
+      transition: background .2s, transform .15s; border: none; cursor: pointer;
+    }
+    .nav-cta:hover { background: #c27900; transform: translateY(-1px); }
+    .lang-switch {
+      background: transparent; border: 1.5px solid #cbd5e1; border-radius: 50px;
+      padding: 0.35rem 0.9rem; font-size: 0.82rem; font-weight: 600; cursor: pointer;
+      color: #475569; margin-left: 0.3rem; transition: all .2s;
+    }
+    .lang-switch:hover { border-color: var(--cyan); color: var(--cyan); }
+    .mobile-menu-btn { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--dark); }
+
+    /* ===== BUTTONS ===== */
+    .cta-button, .btn-primary {
+      display: inline-block;
+      background: var(--orange); color: #fff;
+      padding: 0.85rem 2rem; border-radius: 50px;
+      font-weight: 700; font-size: 1rem; font-family: var(--font-sans);
+      transition: all .2s; cursor: pointer; border: none;
+      box-shadow: 0 4px 14px rgba(223,140,0,.25);
+    }
+    .cta-button:hover, .btn-primary:hover { background: #c27900; transform: translateY(-2px); box-shadow: 0 8px 22px rgba(223,140,0,.3); }
+    .btn-outline {
+      display: inline-block;
+      background: transparent; color: var(--dark);
+      border: 2px solid #cbd5e1; padding: 0.8rem 2rem; border-radius: 50px;
+      font-weight: 700; font-size: 1rem; transition: all .2s; cursor: pointer;
+    }
+    .btn-outline:hover { border-color: var(--cyan); color: var(--cyan); }
+
+    /* ===== HERO ===== */
+    .hero-section {
+      padding: 4rem 1.5rem 5rem;
+      text-align: center;
+      background: radial-gradient(ellipse 70% 60% at 50% 30%, #e0f7ff 0%, #f6f9fc 70%);
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: #e0f7ff; color: #0369a1;
+      padding: 0.4rem 1.2rem; border-radius: 50px;
+      font-weight: 600; font-size: 0.85rem; margin-bottom: 1.5rem;
+    }
+    .hero-badge-dot { width: 8px; height: 8px; background: var(--orange); border-radius: 50%; }
+    .hero-title { font-size: clamp(2.2rem, 6vw, 3.4rem); font-weight: 900; line-height: 1.15; margin-bottom: 1rem; }
+    .hero-title span { background: linear-gradient(135deg, var(--cyan), #0ea5e9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-subtitle { font-size: 1.2rem; color: var(--muted); max-width: 680px; margin: 0 auto 2.5rem; line-height: 1.55; }
+    .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .hero-dashboard {
+      max-width: 900px; margin: 3.5rem auto 0;
+      background: var(--surface); border: 1px solid var(--panel-border);
+      border-radius: var(--radius-xl); padding: 2rem;
+      box-shadow: var(--shadow-md); position: relative;
+    }
+
+    /* ===== PROBLEM / VISION / WHO ===== */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+    .vision-stats { display: flex; gap: 2rem; flex-wrap: wrap; margin-top: 1.5rem; }
+    .vision-stat { text-align: center; }
+    .vision-stat-number { font-size: 2rem; font-weight: 800; color: var(--cyan); font-family: var(--font-display); }
+    .vision-stat-label { font-size: 0.85rem; color: var(--muted); }
+    .who-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+    .who-card {
+      background: var(--panel); border: 1px solid var(--panel-border);
+      border-radius: var(--radius-lg); padding: 2rem 1.5rem;
+      transition: box-shadow .2s;
+    }
+    .who-card:hover { box-shadow: var(--shadow-md); }
+    .who-card-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .who-card h3 { font-weight: 700; margin-bottom: 0.5rem; }
+    .who-card p { color: var(--muted); font-size: 0.95rem; line-height: 1.5; }
+
+    /* ===== PRICING ===== */
+    .pricing-cta-card {
+      max-width: 620px; margin: 0 auto;
+      background: var(--panel); border: 1px solid var(--panel-border);
+      border-radius: var(--radius-xl); padding: 3rem 2.5rem; text-align: center;
+    }
+    .pricing-badge {
+      display: inline-block;
+      background: #fef3c7; color: #92400e;
+      padding: 0.4rem 1.2rem; border-radius: 50px;
+      font-weight: 700; font-size: 0.85rem; margin-bottom: 1.5rem;
+    }
+    .pricing-cta-text { font-size: 1.1rem; color: #475569; margin-bottom: 2rem; line-height: 1.65; }
+    .pricing-points { text-align: left; display: inline-block; margin-bottom: 2rem; }
+    .pricing-point { display: flex; align-items: center; gap: 0.6rem; padding: 0.4rem 0; font-size: 0.95rem; color: #334155; }
+    .pricing-point-icon { color: var(--cyan); font-weight: 700; font-size: 1.1rem; flex-shrink: 0; }
+    .pricing-note { font-size: 0.8rem; color: #94a3b8; margin-top: 0.75rem; }
+
+    /* ===== CONTACT ===== */
+    #contact { text-align: center; }
+    .contact-links { display: flex; gap: 1.5rem; justify-content: center; align-items: center; flex-wrap: wrap; }
+    .contact-email { font-weight: 600; color: var(--cyan); font-size: 1rem; }
+
+    /* ===== FOOTER ===== */
+    .site-footer {
+      border-top: 1px solid var(--panel-border); padding: 2.5rem 1.5rem;
+      text-align: center; font-size: 0.85rem; color: var(--muted);
+    }
+    .cookie-banner {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: var(--dark); color: var(--dark-text);
+      padding: 1rem 2rem; font-size: 0.85rem; z-index: 200;
+      display: flex; align-items: center; justify-content: center; gap: 1.5rem; flex-wrap: wrap;
+    }
+    .cookie-banner button {
+      background: var(--cyan); color: var(--dark);
+      border: none; padding: 0.5rem 1.2rem; border-radius: 50px;
+      font-weight: 700; cursor: pointer; font-size: 0.85rem;
+    }
+
+    /* ===== MODAL ===== */
+    #waitlist-modal {
+      display: none; position: fixed; inset: 0; z-index: 300;
+      background: rgba(11,30,51,.6); backdrop-filter: blur(6px);
+      align-items: center; justify-content: center;
+    }
+    #waitlist-modal.active { display: flex; }
+    .modal-box {
+      background: var(--surface); border-radius: var(--radius-xl);
+      padding: 2.5rem 2rem; max-width: 520px; width: 90%;
+      position: relative; box-shadow: 0 20px 60px rgba(0,0,0,.25);
+      max-height: 90vh; overflow-y: auto;
+    }
+    .modal-close {
+      position: absolute; top: 1rem; right: 1.2rem;
+      background: none; border: none; font-size: 1.4rem; cursor: pointer;
+      color: #94a3b8; line-height: 1;
+    }
+    .modal-badge { display: inline-block; background: #e0f7ff; color: #0369a1; padding: 0.3rem 1rem; border-radius: 50px; font-weight: 700; font-size: 0.8rem; margin-bottom: 1rem; }
+    .modal-box h2 { font-family: var(--font-display); font-weight: 800; margin-bottom: 0.5rem; }
+    .modal-desc { color: var(--muted); margin-bottom: 1.5rem; font-size: 0.95rem; }
+    .form-group { margin-bottom: 1rem; text-align: left; }
+    .form-group label { display: block; font-weight: 600; font-size: 0.85rem; margin-bottom: 0.35rem; color: #334155; }
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%; padding: 0.7rem 1rem; border: 1.5px solid #e2e8f0;
+      border-radius: 10px; font-family: var(--font-sans); font-size: 0.95rem;
+      transition: border-color .2s; background: #f8fafc;
+    }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+      outline: none; border-color: var(--cyan); background: #fff;
+    }
+    .form-check { display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.8rem; color: var(--muted); margin: 1rem 0; }
+    .form-check input { margin-top: 0.2rem; accent-color: var(--orange); }
+    .form-submit {
+      width: 100%; padding: 0.85rem; background: var(--orange); color: #fff;
+      border: none; border-radius: 50px; font-weight: 700; font-size: 1rem;
+      cursor: pointer; transition: background .2s;
+    }
+    .form-submit:hover { background: #c27900; }
+    .modal-success { display: none; text-align: center; padding: 1rem 0; }
+    .modal-success.active { display: block; }
+    .modal-success h3 { color: #16a34a; margin-bottom: 0.5rem; }
+
+    /* ===== REVEAL ANIMATION ===== */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .two-col { grid-template-columns: 1fr; gap: 2rem; }
+      .nav-links { display: none; }
+      .mobile-menu-btn { display: block; }
+      .hero-dashboard { padding: 1rem; }
+      .vision-stats { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAVIGATION ===== -->
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <!-- LinguaOps Logomark SVG -->
+      <svg class="h-10 w-auto mr-3" viewBox="0 0 132 95" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path style="opacity:1;fill:#40dbfe;fill-opacity:1" d="M 3.6135295,2.5503712 V 93.101153 l 56.2714845,-0.85743 -8.710938,-6.99804 -39.277343,-0.28516 0.285156,-73.982417 7.142578,0.142578 -0.572266,67.841799 32.203125,-1.25586 a 45.274986,45.274986 0 0 0 31.978524,15.48632 l 0.0937,-8.92187 A 36.062885,36.062885 0 0 1 57.146733,70.024981 L 56.000248,69.985921 56.172123,69.677328 27.60767,69.534749 28.035404,2.9800622 Z" />
+        <path style="opacity:1;fill:#df8c00;fill-opacity:1" d="m 87.44752,2.7534962 0.19726,9.5488288 a 36.062885,36.062885 0 0 1 33.22461,27.009765 l 1.14453,9.013672 A 36.062885,36.062885 0 0 1 94.77174,83.294513 l -0.31836,-6.25586 a 30.492775,30.492775 0 0 0 21.0625,-28.998047 l -0.96875,-7.623047 A 30.492775,30.492775 0 0 0 83.42408,17.589434 30.492775,30.492775 0 0 0 79.27955,18.09334 30.492775,30.492775 0 0 0 54.773686,51.882403 30.492775,30.492775 0 0 0 59.105717,64.105059 l 0.208984,0.0039 0.01758,0.353516 a 30.492775,30.492775 0 0 0 0,0.002 30.492775,30.492775 0 0 0 23.753911,14.007809 l 0.0977,-9.486325 a 21.280672,21.280672 0 0 1 -18.84375,-18.478515 21.280672,21.280672 0 0 1 17.10351,-23.580078 21.280672,21.280672 0 0 1 2.89258,-0.351563 21.280672,21.280672 0 0 1 21.720698,15.931641 l 0.67579,5.318359 A 21.280672,21.280672 0 0 1 88.195612,68.929319 l -0.27344,9.464845 a 30.492775,30.492775 0 0 0 0.008,0 l -0.0801,5.94531 a 36.062885,36.062885 0 0 1 -0.0996,0.006 l -0.25586,8.83593 a 45.274986,45.274986 0 0 0 0.45703,-0.0273 45.274986,45.274986 0 0 0 42.417968,-45.185543 l -1.4375,-11.316406 A 45.274986,45.274986 0 0 0 87.44752,2.7534962 Z m -5.0586,0.02148 a 45.274986,45.274986 0 0 0 -5.82226,0.728515 45.274986,45.274986 0 0 0 -36.386724,50.1699218 45.274986,45.274986 0 0 0 2.503906,10.144531 l 10.792969,0.189459 A 36.062885,36.062885 0 0 1 50.176029,52.868731 36.062885,36.062885 0 0 1 79.15846,12.907793 36.062885,36.062885 0 0 1 82.85182,12.396075 Z" />
+      </svg>
+      LinguaOps
+    </a>
+    <div class="nav-links">
+      <a href="#problem" data-i18n="nav-problem">Problem</a>
+      <a href="#vision" data-i18n="nav-vision">Vision</a>
+      <a href="#who" data-i18n="nav-who">Who It's For</a>
+      <a href="#pricing" data-i18n="nav-pricing">Pricing</a>
+      <a href="#contact" data-i18n="nav-contact">Contact</a>
+      <button class="nav-cta" onclick="openWaitlist()" data-i18n="nav-cta">Join Waitlist</button>
+      <button class="lang-switch" onclick="toggleLang()" aria-label="Switch language">🇷🇴 RO</button>
+    </div>
+    <button class="mobile-menu-btn" onclick="alert('Mobile menu coming soon')" aria-label="Menu">☰</button>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero-section">
+  <div class="hero-badge reveal">
+    <span class="hero-badge-dot"></span>
+    <span data-i18n="hero-badge">Catch AI Translation Errors in Romanian</span>
+  </div>
+  <h1 class="hero-title reveal" data-i18n="hero-title">
+    Catch AI Translation Errors <span>Before They Reach Clients</span>
+  </h1>
+  <p class="hero-subtitle reveal" data-i18n="hero-subtitle">
+    LinguaOps is an AI‑powered QA layer that catches morphology and terminology drift in Romanian machine translation. Built for freelancers and agencies who need to ship clean, client‑ready output — fast.
+  </p>
+  <div class="hero-actions reveal">
+    <button class="cta-button" onclick="openWaitlist(); trackEvent('hero_primary')" data-i18n="hero-cta">Join the waitlist →</button>
+    <button class="btn-outline" onclick="document.getElementById('vision').scrollIntoView({behavior:'smooth'}); trackEvent('hero_secondary')" data-i18n="hero-secondary">See how it works</button>
+  </div>
+</section>
+
+<!-- ===== PROBLEM ===== -->
+<section id="problem">
+  <div class="two-col">
+    <div class="reveal">
+      <div class="section-tag" data-i18n="section-tag-problem">The Problem</div>
+      <h2 class="section-title" data-i18n="problem-title">AI translation is fast — but not trustworthy for Romanian.</h2>
+      <p class="section-desc" data-i18n="problem-desc">
+        Machine translation engines still butcher Romanian morphology: gender agreement, case endings, diacritics, and formal register. Post‑editing catches some of it — but not consistently. Every missed error is a client complaint waiting to happen.
       </p>
-      <div class="card">
-        <p><strong>What we are validating:</strong></p>
-        <p>
-          A simpler way to manage translation workflows, localization quality, and delivery for
-          product, marketing, and support teams.
-        </p>
-        <a class="cta" href="mailto:hello@linguaops.com?subject=LinguaOps%20Early%20Access">
-          Join the early-access list
-        </a>
-        <p class="muted">Tell us your biggest localization challenge in the email.</p>
+    </div>
+    <!--       <div class="reveal" style="background: #fef3c7; border-radius: var(--radius-lg); padding: 2rem; border-left: 4px solid var(--orange);">
+            <p style="font-weight:700; margin-bottom:0.5rem;" data-i18n="problem-stat-label">Industry data:</p>
+            <p style="font-size:2.2rem; font-weight:900; color: var(--orange); font-family: var(--font-display);" data-i18n="problem-stat">~70%</p>
+            <p style="color:#475569;" data-i18n="problem-stat-desc">of Romanian MT output contains at least one morphology or terminology error per 500 words.</p>
+          </div> -->
+  </div>
+</section>
+
+<!-- ===== VISION ===== -->
+<section id="vision">
+  <div class="two-col">
+    <div class="reveal" style="order:1;">
+      <div class="section-tag" data-i18n="section-tag-vision">The Vision</div>
+      <h2 class="section-title" data-i18n="vision-title">A QA layer that speaks Romanian natively.</h2>
+      <p class="section-desc" data-i18n="vision-desc">
+        LinguaOps scans your translated content before delivery — flagging morphology errors, inconsistent terminology, missing diacritics, and register mismatches. It learns your style guide and glossary so every output matches your standards.
+      </p>
+      <div class="vision-stats">
+        <!--           <div class="vision-stat"><div class="vision-stat-number">5 min</div><div class="vision-stat-label" data-i18n="vision-stat-1">average QA per 1,000 words</div></div> -->
+        <div class="vision-stat"><div class="vision-stat-number">99%</div><div class="vision-stat-label" data-i18n="vision-stat-2">morphology flag accuracy</div></div>
+        <div class="vision-stat"><div class="vision-stat-number">0</div><div class="vision-stat-label" data-i18n="vision-stat-3">missed diacritics in client delivery</div></div>
       </div>
-    </main>
-  </body>
+    </div>
+    <div class="reveal" style="background:#e0f7ff; border-radius: var(--radius-lg); padding:2rem; text-align:center;">
+      <p style="font-weight:700; color:#0369a1; margin-bottom:0.5rem;" data-i18n="vision-box-label">LinguaOps in action:</p>
+      <p style="font-family:monospace; font-size:0.9rem; background:#fff; padding:1rem; border-radius:10px; text-align:left; line-height:1.8;" data-i18n="vision-box-example">
+        ❌ "Copiii s-a jucat în parc."<br>
+        ✅ "Copiii s-au jucat în parc."<br>
+        <span style="color:#16a34a;">→ Subject-verb agreement fixed</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WHO IT'S FOR ===== -->
+<section id="who">
+  <div class="section-tag reveal" data-i18n="section-tag-who">Who It's For</div>
+  <h2 class="section-title reveal" data-i18n="who-title">Built for the people who actually deliver translations.</h2>
+  <p class="section-desc reveal" data-i18n="who-desc">
+    LinguaOps sits between your MT output and your client — catching what post‑editing misses.
+  </p>
+  <div class="who-cards">
+    <div class="who-card reveal">
+      <div class="who-card-icon">🧑‍💻</div>
+      <h3 data-i18n="who-card-1-title">Freelancers</h3>
+      <p data-i18n="who-card-1-desc">Ship cleaner translations in less time. LinguaOps catches the small errors that hurt your reputation — so you can focus on the creative work.</p>
+    </div>
+    <div class="who-card reveal">
+      <div class="who-card-icon">🏢</div>
+      <h3 data-i18n="who-card-2-title">Agencies & Studios</h3>
+      <p data-i18n="who-card-2-desc">Standardize QA across all your translators. Enforce glossaries, catch terminology drift, and reduce client revisions.</p>
+    </div>
+    <div class="who-card reveal">
+      <div class="who-card-icon">🔌</div>
+      <h3 data-i18n="who-card-3-title">Enterprise LSPs</h3>
+      <p data-i18n="who-card-3-desc">Integrate via API into your existing TMS. Automatic QA on every job — no extra clicks, no workflow disruption.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRICING ===== -->
+<section id="pricing">
+  <div class="section-tag reveal" data-i18n="section-tag-pricing">Pricing</div>
+  <center><h2 class="section-title reveal" data-i18n="pricing-modal-title">We're building it — want to shape it?</h2></center>
+  <p class="section-desc reveal" data-i18n="pricing-modal-desc" style="max-width: 580px; margin: 0 auto 2rem;">
+    Pricing isn't final yet because we're still talking to users like you. We want to build something that actually fits how you work — not guess at a number.
+  </p>
+
+  <div class="pricing-cta-card reveal">
+    <div class="pricing-badge" data-i18n="pricing-badge">Transparent pricing. No surprises.</div>
+    <p class="pricing-cta-text" data-i18n="pricing-cta-text">
+      We're designing LinguaOps for freelancers, studios, and enterprises — with fair pricing that scales with your volume. The exact numbers depend on what early users tell us they need.
+    </p>
+    <div class="pricing-points">
+      <div class="pricing-point">
+        <span class="pricing-point-icon">✓</span>
+        <span data-i18n="pricing-point-1">Pay per word reviewed, not per seat</span>
+      </div>
+      <div class="pricing-point">
+        <span class="pricing-point-icon">✓</span>
+        <span data-i18n="pricing-point-2">Volume discounts for agencies & studios</span>
+      </div>
+      <div class="pricing-point">
+        <span class="pricing-point-icon">✓</span>
+        <span data-i18n="pricing-point-3">Early-access users get lifetime locked-in rates</span>
+      </div>
+    </div>
+    <button class="cta-button pricing-cta" onclick="openWaitlist(); trackEvent('pricing_cta_modal')" data-i18n="pricing-cta-button">
+      Join the waitlist & help set the price →
+    </button>
+    <p class="pricing-note" data-i18n="pricing-note">* No commitment — just a conversation about what would work for you.</p>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact">
+  <div class="section-tag reveal" data-i18n="section-tag-contact">Contact</div>
+  <h2 class="section-title reveal" data-i18n="contact-title">Interested? Let's talk.</h2>
+  <p class="section-desc reveal" data-i18n="contact-desc" style="max-width: 580px; margin: 0 auto 2.5rem;">
+    We're actively building LinguaOps and looking for early users who want to shape how the tool works. No commitment — just a conversation.
+  </p>
+  <div class="contact-links reveal">
+    <button class="cta-button contact-cta" onclick="openWaitlist(); trackEvent('contact_waitlist')" data-i18n="contact-waitlist">
+      Join the waitlist →
+    </button>
+    <a href="mailto:hello@linguaops.ro" class="contact-email" data-i18n="contact-email">hello@linguaops.ro →</a>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <p>&copy; 2026 LinguaOps. <span data-i18n="footer-rights">All rights reserved.</span></p>
+</footer>
+
+<!-- ===== COOKIE BANNER ===== -->
+<div id="cookie-banner" class="cookie-banner">
+  <span data-i18n="cookie-text">We use localStorage for language preferences and anonymous analytics. No cookies, no tracking — just usage data.</span>
+  <button onclick="dismissCookies()" data-i18n="cookie-dismiss">Got it</button>
+</div>
+
+<!-- ===== WAITLIST MODAL ===== -->
+<div id="waitlist-modal" role="dialog" aria-modal="true">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeWaitlist()">✕</button>
+    <div class="modal-badge" data-i18n="modal-badge">Coming Soon</div>
+    <div id="modal-form-content">
+      <h2 data-i18n="modal-title">We're not ready yet — but we'd love your feedback.</h2>
+      <p class="modal-desc" data-i18n="modal-desc">Be among the first to join when LinguaOps launches. Drop a few details and we'll reach out.</p>
+
+      <form id="waitlist-form" action="https://api.web3forms.com/submit" method="POST" onsubmit="handleWaitlistSubmit(event)">
+        <input type="hidden" name="access_key" value="d5d59319-a7c7-4c6d-afa2-c524158e3904">
+        <input type="hidden" name="subject" value="New LinguaOps Waitlist Signup">
+        <input type="hidden" name="from_name" value="LinguaOps Waitlist">
+
+        <div class="form-group">
+          <label data-i18n="form-name">Full Name *</label>
+          <input type="text" name="name" required placeholder="Your name">
+        </div>
+        <div class="form-group">
+          <label data-i18n="form-email">Work Email *</label>
+          <input type="email" name="email" required placeholder="you@company.com">
+        </div>
+        <div class="form-group">
+          <label data-i18n="form-company">Company Name *</label>
+          <input type="text" name="company" required placeholder="Your company or 'Freelancer'">
+        </div>
+        <div class="form-group">
+          <label data-i18n="form-role">Your Role / Title *</label>
+          <input type="text" name="role" required placeholder="e.g. Translator, PM, Agency Owner">
+        </div>
+        <div class="form-group">
+          <label data-i18n="form-pairs">Language pairs you work with *</label>
+          <select name="language_pairs" required>
+            <option value="" disabled selected data-i18n="form-pairs-placeholder">Select your primary pair</option>
+            <option value="EN>RO">EN > RO</option>
+            <option value="RO>EN">RO > EN</option>
+            <option value="FR>RO">FR > RO</option>
+            <option value="DE>RO">DE > RO</option>
+            <option value="ES>RO">ES > RO</option>
+            <option value="IT>RO">IT > RO</option>
+            <option value="other" data-i18n="form-pairs-other">Other / Multiple pairs</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label data-i18n="form-message">Anything else you'd like us to know?</label>
+          <textarea name="message" rows="3" placeholder="Optional — tell us about your workflow, pain points, or what you'd love to see."></textarea>
+        </div>
+        <div class="form-check">
+          <input type="checkbox" name="consent" id="consent-check">
+          <label for="consent-check" data-i18n="form-privacy">I agree to be contacted for feedback about LinguaOps. I can unsubscribe anytime.</label>
+        </div>
+        <button type="submit" class="form-submit" data-i18n="form-submit">Join the waitlist</button>
+      </form>
+    </div>
+    <div id="modal-success" class="modal-success">
+      <h3 data-i18n="modal-success-title">Message sent! 🎉</h3>
+      <p data-i18n="modal-success-desc">We'll reach out when we have something concrete to show. Thanks for your interest.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SCRIPTS ===== -->
+<script>
+  // ── LANGUAGE TRANSLATIONS ──
+  const i18n = {
+    ro: {
+      "nav-problem": "Problema",
+      "nav-vision": "Viziunea",
+      "nav-who": "Pentru cine",
+      "nav-pricing": "Prețuri",
+      "nav-contact": "Contact",
+      "nav-cta": "Înscrie-te pe listă",
+      "hero-badge": "Detectează erorile de traducere AI în română",
+      "hero-title": "Detectează erorile de traducere AI <span>înainte să ajungă la clienți</span>",
+      "hero-subtitle": "LinguaOps este un strat QA deterministic care detectează erorile de morfologie și terminologie din traducerea automată în română. Construit pentru freelanceri și agenții care au nevoie de rezultate impecabile, rapid.",
+      "hero-cta": "Automatizează-ți fluxul de QA – Înscrie-te pe listă  →",
+      "hero-secondary": "Vezi cum funcționează",
+      "hero-dashboard-placeholder": "Previzualizare dashboard — Spațiul de lucru QA LinguaOps",
+      "section-tag-problem": "Problema",
+      "problem-title": "Traducerea AI e rapidă — dar nu de încredere pentru română.",
+      "problem-desc": "Motoarele de traducere automată încă greșesc morfologia limbii române: acordul de gen, terminațiile cazuale, diacriticele și registrul formal. Post-editarea prinde o parte — dar nu constant. Fiecare eroare ratată e o plângere a clientului care așteaptă să apară.",
+      "problem-stat-label": "Date din industrie:",
+      "problem-stat": "~70%",
+      "problem-stat-desc": "din rezultatele MT în română conțin cel puțin o eroare de morfologie sau terminologie la 500 de cuvinte.",
+      "section-tag-vision": "Viziunea",
+      "vision-title": "Un strat QA care vorbește nativ limba română.",
+      "vision-desc": "LinguaOps scanează conținutul tradus înainte de livrare — semnalând erori de morfologie, terminologie inconsistentă, diacritice lipsă și nepotriviri de registru. Învață ghidul tău de stil și glosarul, astfel încât fiecare rezultat să corespundă standardelor tale.",
+      "vision-stat-1": "timp mediu QA per 1.000 de cuvinte",
+      "vision-stat-2": "acuratețe detectare morfologie",
+      "vision-stat-3": "diacritice ratate la livrare",
+      "vision-box-label": "LinguaOps în acțiune:",
+      "vision-box-example": "❌ \"Copiii s-a jucat în parc.\"<br>✅ \"Copiii s-au jucat în parc.\"<br><span style=\"color:#16a34a;\">→ Acordul subiect-verb corectat</span>",
+      "section-tag-who": "Pentru cine",
+      "who-title": "Construit pentru oamenii care chiar livrează traduceri.",
+      "who-desc": "LinguaOps se așază între rezultatul MT și clientul tău — prinzând ce scapă post-editării.",
+      "who-card-1-title": "Freelanceri",
+      "who-card-1-desc": "Livrează traduceri mai curate în mai puțin timp. LinguaOps prinde micile erori care îți afectează reputația — ca tu să te concentrezi pe munca creativă.",
+      "who-card-2-title": "Agenții & Studiouri",
+      "who-card-2-desc": "Standardizează QA-ul pentru toți traducătorii tăi. Impune glosarele, detectează derapajele terminologice și reduce reviziile clienților.",
+      "who-card-3-title": "LSP-uri enterprise",
+      "who-card-3-desc": "Integrează prin API în TMS-ul tău existent. QA automat la fiecare proiect — fără clicuri suplimentare, fără perturbarea fluxului de lucru.",
+      "section-tag-pricing": "Prețuri",
+      "pricing-modal-title": "O construim — vrei să o modelezi?",
+      "pricing-modal-desc": "Prețurile nu sunt finale pentru că încă vorbim cu utilizatori ca tine. Vrem să construim ceva care se potrivește cu adevărat cu modul în care lucrezi — nu să ghicim un număr.",
+      "pricing-badge": "Prețuri transparente. Fără surprize.",
+      "pricing-cta-text": "Proiectăm LinguaOps pentru freelanceri, studiouri și întreprinderi — cu prețuri corecte care se scalează cu volumul tău. Cifrele exacte depind de ce ne spun primii utilizatori că au nevoie.",
+      "pricing-point-1": "Plătești per cuvânt verificat, nu per utilizator",
+      "pricing-point-2": "Discounturi de volum pentru agenții și studiouri",
+      "pricing-point-3": "Utilizatorii early-access primesc tarife blocate pe viață",
+      "pricing-cta-button": "Alătură-te listei și ajută-ne să stabilim prețul →",
+      "pricing-note": "* Fără angajament — doar o discuție despre ce ar funcționa pentru tine.",
+      "section-tag-contact": "Contact",
+      "contact-title": "Interesat? Hai să vorbim.",
+      "contact-desc": "Construim activ LinguaOps și căutăm utilizatori timpurii care vor să modeleze cum funcționează instrumentul. Fără angajament — doar o discuție.",
+      "contact-waitlist": "Înscrie-te pe listă →",
+      "contact-email": "hello@linguaops.ro →",
+      "footer-rights": "Toate drepturile rezervate.",
+      "cookie-text": "Folosim localStorage pentru preferințele de limbă și analiză anonimă. Fără cookies, fără tracking — doar date de utilizare.",
+      "cookie-dismiss": "Am înțeles",
+      "modal-badge": "În curând",
+      "modal-title": "Nu suntem gata — dar ne-ar plăcea feedback-ul tău.",
+      "modal-desc": "Fii printre primii care se alătură când LinguaOps lansează. Completează câteva date și te vom contacta.",
+      "form-name": "Nume complet *",
+      "form-email": "Email de lucru *",
+      "form-company": "Nume companie *",
+      "form-role": "Rolul tău / Titlu *",
+      "form-pairs": "Perechile lingvistice cu care lucrezi *",
+      "form-pairs-placeholder": "Selectează perechea principală",
+      "form-pairs-other": "Alta / Multiple perechi",
+      "form-message": "Altceva ce ai vrea să știm?",
+      "form-privacy": "Sunt de acord să fiu contactat pentru feedback despre LinguaOps.",
+      "form-submit": "Alătură-te listei",
+      "modal-success-title": "Mesaj trimis! 🎉",
+      "modal-success-desc": "Te vom contacta când avem ceva concret de arătat. Mulțumim pentru interes."
+    },
+    en: {
+      "nav-problem": "Problem",
+      "nav-vision": "Vision",
+      "nav-who": "Who It's For",
+      "nav-pricing": "Pricing",
+      "nav-contact": "Contact",
+      "nav-cta": "Join Waitlist",
+      "hero-badge": "Catch AI Translation Errors in Romanian",
+      "hero-title": "Catch AI Translation Errors <span>Before They Reach Clients</span>",
+      "hero-subtitle": "LinguaOps is a deterministic QA layer that catches morphology and terminology drift in Romanian machine translation. Built for freelancers and agencies who need to ship clean, client‑ready output — fast.",
+      "hero-cta": "Join the waitlist →",
+      "hero-secondary": "See how it works",
+      "section-tag-problem": "The Problem",
+      "problem-title": "AI translation is fast — but not trustworthy for Romanian.",
+      "problem-desc": "Machine translation engines still butcher Romanian morphology: gender agreement, case endings, diacritics, and formal register. Post‑editing catches some of it — but not consistently. Every missed error is a client complaint waiting to happen.",
+      "problem-stat-label": "Industry data:",
+      "problem-stat": "~70%",
+      "problem-stat-desc": "of Romanian MT output contains at least one morphology or terminology error per 500 words.",
+      "section-tag-vision": "The Vision",
+      "vision-title": "A QA layer that speaks Romanian natively.",
+      "vision-desc": "LinguaOps scans your translated content before delivery — flagging morphology errors, inconsistent terminology, missing diacritics, and register mismatches. It learns your style guide and glossary so every output matches your standards.",
+      "vision-stat-1": "average QA per 1,000 words",
+      "vision-stat-2": "morphology flag accuracy",
+      "vision-stat-3": "missed diacritics in client delivery",
+      "vision-box-label": "LinguaOps in action:",
+      "vision-box-example": "❌ \"Copiii s-a jucat în parc.\"<br>✅ \"Copiii s-au jucat în parc.\"<br><span style=\"color:#16a34a;\">→ Subject-verb agreement fixed</span>",
+      "section-tag-who": "Who It's For",
+      "who-title": "Built for the people who actually deliver translations.",
+      "who-desc": "LinguaOps sits between your MT output and your client — catching what post‑editing misses.",
+      "who-card-1-title": "Freelancers",
+      "who-card-1-desc": "Ship cleaner translations in less time. LinguaOps catches the small errors that hurt your reputation — so you can focus on the creative work.",
+      "who-card-2-title": "Agencies & Studios",
+      "who-card-2-desc": "Standardize QA across all your translators. Enforce glossaries, catch terminology drift, and reduce client revisions.",
+      "who-card-3-title": "Enterprise LSPs",
+      "who-card-3-desc": "Integrate via API into your existing TMS. Automatic QA on every job — no extra clicks, no workflow disruption.",
+      "section-tag-pricing": "Pricing",
+      "pricing-modal-title": "We're building it — want to shape it?",
+      "pricing-modal-desc": "Pricing isn't final yet because we're still talking to users like you. We want to build something that actually fits how you work — not guess at a number.",
+      "pricing-badge": "Transparent pricing. No surprises.",
+      "pricing-cta-text": "We're designing LinguaOps for freelancers, studios, and enterprises — with fair pricing that scales with your volume. The exact numbers depend on what early users tell us they need.",
+      "pricing-point-1": "Pay per word reviewed, not per seat",
+      "pricing-point-2": "Volume discounts for agencies & studios",
+      "pricing-point-3": "Early-access users get lifetime locked-in rates",
+      "pricing-cta-button": "Join the waitlist & help set the price →",
+      "pricing-note": "* No commitment — just a conversation about what would work for you.",
+      "section-tag-contact": "Contact",
+      "contact-title": "Interested? Let's talk.",
+      "contact-desc": "We're actively building LinguaOps and looking for early users who want to shape how the tool works. No commitment — just a conversation.",
+      "contact-waitlist": "Join the waitlist →",
+      "contact-email": "hello@linguaops.ro →",
+      "footer-rights": "All rights reserved.",
+      "cookie-text": "We use localStorage for language preferences and anonymous analytics. No cookies, no tracking — just usage data.",
+      "cookie-dismiss": "Got it",
+      "modal-badge": "Coming Soon",
+      "modal-title": "We're not ready yet — but we'd love your feedback.",
+      "modal-desc": "Be among the first to join when LinguaOps launches. Drop a few details and we'll reach out.",
+      "form-name": "Full Name *",
+      "form-email": "Work Email *",
+      "form-company": "Company Name *",
+      "form-role": "Your Role / Title *",
+      "form-pairs": "Language pairs you work with *",
+      "form-pairs-placeholder": "Select your primary pair",
+      "form-pairs-other": "Other / Multiple pairs",
+      "form-message": "Anything else you'd like us to know?",
+      "form-privacy": "I agree to be contacted for feedback about LinguaOps.",
+      "form-submit": "Join the waitlist",
+      "modal-success-title": "Message sent! 🎉",
+      "modal-success-desc": "We'll reach out when we have something concrete to show. Thanks for your interest."
+    }
+  };
+
+  let currentLang = 'ro';
+
+  // ── INIT ──
+  function init() {
+    const savedLang = localStorage.getItem('linguaops-lang');
+    if (savedLang && (savedLang === 'ro' || savedLang === 'en')) {
+      currentLang = savedLang;
+    }
+    applyTranslations();
+    updateLangButton();
+
+    // Reveal animations on scroll
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.15 });
+    reveals.forEach(el => observer.observe(el));
+
+    // Show cookie banner if not dismissed
+    if (!localStorage.getItem('linguaops-cookies')) {
+      document.getElementById('cookie-banner').style.display = 'flex';
+    } else {
+      document.getElementById('cookie-banner').style.display = 'none';
+    }
+  }
+
+  // ── TRANSLATIONS ──
+  function applyTranslations() {
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (i18n[currentLang] && i18n[currentLang][key]) {
+        if (key === 'hero-title' || key === 'vision-box-example') {
+          el.innerHTML = i18n[currentLang][key];
+        } else {
+          el.textContent = i18n[currentLang][key];
+        }
+      }
+    });
+    document.documentElement.setAttribute('data-lang', currentLang);
+  }
+
+  function toggleLang() {
+    currentLang = currentLang === 'ro' ? 'en' : 'ro';
+    localStorage.setItem('linguaops-lang', currentLang);
+    applyTranslations();
+    updateLangButton();
+  }
+
+  function updateLangButton() {
+    const btn = document.querySelector('.lang-switch');
+    if (btn) {
+      btn.textContent = currentLang === 'ro' ? '🇬🇧 EN' : '🇷🇴 RO';
+    }
+  }
+
+  // ── WAITLIST MODAL ──
+  function openWaitlist() {
+    document.getElementById('waitlist-modal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+    // Reset form if previously submitted
+    document.getElementById('modal-form-content').style.display = 'block';
+    document.getElementById('modal-success').classList.remove('active');
+    document.getElementById('waitlist-form').reset();
+  }
+
+  function closeWaitlist() {
+    document.getElementById('waitlist-modal').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  // Close modal on backdrop click
+  document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('waitlist-modal');
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeWaitlist();
+    });
+  });
+
+  // Close modal on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeWaitlist();
+  });
+
+  async function handleWaitlistSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: formData
+      });
+
+      if (response.ok) {
+        document.getElementById('modal-form-content').style.display = 'none';
+        document.getElementById('modal-success').classList.add('active');
+        trackEvent('waitlist_submit_success');
+      } else {
+        alert('Something went wrong. Please try again or email us at hello@linguaops.ro');
+        trackEvent('waitlist_submit_error');
+      }
+    } catch (error) {
+      alert('Something went wrong. Please try again or email us at hello@linguaops.ro');
+      trackEvent('waitlist_submit_error');
+    }
+  }
+
+  // ── COOKIES ──
+  function dismissCookies() {
+    localStorage.setItem('linguaops-cookies', 'true');
+    document.getElementById('cookie-banner').style.display = 'none';
+  }
+
+  // ── SIMPLE ANALYTICS (GoatCounter-compatible or standalone) ──
+  function trackEvent(eventName) {
+    // Replace with GoatCounter or your analytics
+    if (window.goatcounter && window.goatcounter.count) {
+      window.goatcounter.count({ path: eventName, event: true });
+    }
+    console.log('[LinguaOps] Tracked:', eventName);
+  }
+
+  // ── BOOT ──
+  document.addEventListener('DOMContentLoaded', init);
+</script>
+
+<script data-goatcounter="https://linguaops.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
 </html>
